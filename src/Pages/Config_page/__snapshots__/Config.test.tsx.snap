@@ -7,7 +7,7 @@ exports[`Pagina de configuração Renderizada corretamente 1`] = `
   >
     <section>
       <h2>
-        Bora lá!!!
+        Bora jogar!!!
       </h2>
       <form
         class="formGroup"
@@ -35,7 +35,9 @@ exports[`Pagina de configuração Renderizada corretamente 1`] = `
         </button>
         
       </form>
-      <ul />
+      <ul
+        class="list"
+      />
       <footer
         class="footerConfig"
       >

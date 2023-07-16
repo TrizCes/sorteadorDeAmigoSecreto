@@ -1,8 +1,8 @@
 import styles  from './Form.module.scss';
-import personAdd from '../../../public/imagens/person_add.svg';
 import { useRef, useState } from 'react';
 import { useAddPerson } from '../../state/hooks/useAddPerson';
 import { useErrorMessage } from '../../state/hooks/useErrorMessage';
+import personAddIcon from './person_add.svg';
 
 const Form = () => {
 
@@ -26,7 +26,7 @@ const Form = () => {
     className={styles.formGroup}
     onSubmit={addPerson}>
       <div className={styles.inputGroup}>
-        <img className={styles.inputImg} src={personAdd} alt="ícone pessoa" />
+        <img className={styles.inputImg} src={personAddIcon} alt="ícone pessoa" />
         <input 
           ref={inputRef}
           value={name}

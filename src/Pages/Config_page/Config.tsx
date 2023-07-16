@@ -7,7 +7,7 @@ const Config = () => {
   return (
     <Card>
       <section>
-        <h2>Bora lá!!!</h2>
+        <h2>Bora jogar!!!</h2>
         <Form />
         <ListParticipants />
         <Footer />
