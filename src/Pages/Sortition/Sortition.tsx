@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useListParticipants } from '../../state/hooks/useListParticipants';
 import { usePickResult } from '../../state/hooks/usePickResult';
 import styles from './Sortition.module.scss';
@@ -22,6 +22,21 @@ const Sortition = () => {
     }
   };
 
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout | null = null;
+
+    if (secretSanta) {
+      timeoutId = setTimeout(() => {
+        setSecretSanta('');
+      }, 4999);
+    }
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [secretSanta]);
+
   return (
     <Card>
       <section className={styles.sortition}>
@@ -44,7 +59,7 @@ const Sortition = () => {
           <button className={styles.buttonPick}>Sortear</button>
         </form>
         {secretSanta && (
-          <p className={styles.result} role="alert">
+          <p className={styles.result} role="alert" id='alert'>
             {secretSanta}
           </p>
         )}

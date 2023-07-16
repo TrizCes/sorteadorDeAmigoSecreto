@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react"
+import { act, fireEvent, render, screen } from "@testing-library/react"
 import { RecoilRoot } from "recoil"
 import { useListParticipants } from "../../state/hooks/useListParticipants"
 import Sortition from "./Sortition"
@@ -49,6 +49,7 @@ describe('Na página de sorteio', ()=>{
   })
 
   test('O amigo secreto é exibido quando solicitado.', ()=>{
+
     render(
       <RecoilRoot>
         <Sortition/>
@@ -65,11 +66,31 @@ describe('Na página de sorteio', ()=>{
       }
     )
     const button = screen.getByRole('button')
-
     fireEvent.click(button)
-
     const secretyFriend = screen.getByRole('alert')
-
     expect(secretyFriend).toBeInTheDocument()
+  })
+
+  test('Esconde amigo secreto após 5 segundos', () => {
+
+    jest.useFakeTimers();
+
+    render(
+      <RecoilRoot>
+        <Sortition/>
+      </RecoilRoot>
+    )
+
+    const select = screen.getByPlaceholderText('Select your name')
+    fireEvent.change(select, { target: { value: participants[1] } })
+
+    const button = screen.getByRole('button')
+    fireEvent.click(button)
+    act(() => {
+      jest.advanceTimersByTime(5000); 
+    });
+  
+    const secretFriend = screen.queryByTestId('alert'); 
+    expect(secretFriend).not.toBeInTheDocument();
   })
 })
